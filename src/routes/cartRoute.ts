@@ -10,9 +10,9 @@ import {
 import validateJWT from "../middlewares/validateJWT";
 import { ExtendRequest } from "../types/extendedRequest";
 
-const router = express.Router();
+const routerCart = express.Router();
 
-router.get("/", validateJWT, async (req: ExtendRequest, res) => {
+routerCart.get("/", validateJWT, async (req: ExtendRequest, res) => {
   try {
     const userId = req?.user?._id;
     const cart = await getActiveCartForUser({ userId, populateProduct: true });
@@ -22,7 +22,7 @@ router.get("/", validateJWT, async (req: ExtendRequest, res) => {
   }
 });
 
-router.delete("/", validateJWT, async (req: ExtendRequest, res) => {
+routerCart.delete("/", validateJWT, async (req: ExtendRequest, res) => {
   try {
     const userId = req?.user?._id;
     const response = await clearCart({ userId });
@@ -32,7 +32,7 @@ router.delete("/", validateJWT, async (req: ExtendRequest, res) => {
   }
 });
 
-router.post("/items", validateJWT, async (req: ExtendRequest, res) => {
+routerCart.post("/items", validateJWT, async (req: ExtendRequest, res) => {
   try {
     const userId = req?.user?._id;
     const { productId, quantity } = req.body;
@@ -43,7 +43,7 @@ router.post("/items", validateJWT, async (req: ExtendRequest, res) => {
   }
 });
 
-router.put("/items", validateJWT, async (req: ExtendRequest, res) => {
+routerCart.put("/items", validateJWT, async (req: ExtendRequest, res) => {
   try {
     const userId = req?.user?._id;
     const { productId, quantity } = req.body;
@@ -54,7 +54,7 @@ router.put("/items", validateJWT, async (req: ExtendRequest, res) => {
   }
 });
 
-router.delete(
+routerCart.delete(
   "/items/:productId",
   validateJWT,
   async (req: ExtendRequest, res) => {
@@ -69,7 +69,7 @@ router.delete(
   }
 );
 
-router.post("/checkout", validateJWT, async (req: ExtendRequest, res) => {
+routerCart.post("/checkout", validateJWT, async (req: ExtendRequest, res) => {
   try {
     const userId = req?.user?._id;
     const { address } = req.body;
@@ -80,4 +80,4 @@ router.post("/checkout", validateJWT, async (req: ExtendRequest, res) => {
   }
 });
 
-export default router;
+export default routerCart;
