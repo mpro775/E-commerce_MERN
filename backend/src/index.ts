@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 import express from "express";
 import mongoose from "mongoose";
-import router from "../src/routes/userRoute";
+import router from "./routes/userRoute";
 import { seedInitialProducts } from "./services/productService";
 import routerProduct from "./routes/productRoute";
 import routerCart from "./routes/cartRoute";
