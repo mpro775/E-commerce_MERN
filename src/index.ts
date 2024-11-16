@@ -1,3 +1,6 @@
+
+import dotenv from "dotenv";
+
 import express from "express";
 import mongoose from "mongoose";
 import router from "../src/routes/userRoute";
@@ -5,12 +8,14 @@ import { seedInitialProducts } from "./services/productService";
 import routerProduct from "./routes/productRoute";
 import routerCart from "./routes/cartRoute";
 
+dotenv.config();
+
 const app = express()
 const port = 3001;
 
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/ecommerce")
+mongoose.connect(process.env.DATABASE_URL || "")
 .then(() => console.log("Mongo Success"))
 .catch((err) => console.log("Faild" , err));
 
